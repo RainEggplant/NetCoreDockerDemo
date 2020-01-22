@@ -10,7 +10,7 @@ namespace NetCoreDockerDemo
         static void Main(string[] args)
         {
             Console.WriteLine("Program started.");
-            var endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3000);
+            var endPoint = new IPEndPoint(IPAddress.Parse("0.0.0.0"), 3000);
             SocketServer server = new SocketServer(endPoint);
             server.HelloMessage += HelloMessage;
             server.Start();
