@@ -76,11 +76,13 @@ namespace NetCoreDockerDemo
             {
                 listener.Bind(EndPoint);
                 listener.Listen(10);
-                
+                Console.WriteLine("Start listening at " + EndPoint.ToString());
+
                 // 开始监听
                 while (true)
                 {
                     Socket handler = listener.Accept();
+                    Console.WriteLine("New connection from " + handler.RemoteEndPoint.ToString());
                     var task = new Task(() => HandleRequest(handler));
                     task.Start();
                 }
@@ -101,6 +103,8 @@ namespace NetCoreDockerDemo
                 byte[] bytes = new byte[1024];
                 int bytesRec = handler.Receive(bytes);
                 string data = Encoding.UTF8.GetString(bytes, 0, bytesRec);
+                Console.WriteLine($"[{handler.RemoteEndPoint.ToString()}]: {data}");
+
                 string[] tokens = data.Trim().Split('|');
                 switch (tokens[0])
                 {

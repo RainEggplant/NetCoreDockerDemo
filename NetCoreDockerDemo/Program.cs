@@ -9,8 +9,8 @@ namespace NetCoreDockerDemo
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            var endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9876);
+            Console.WriteLine("Program started.");
+            var endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3000);
             SocketServer server = new SocketServer(endPoint);
             server.HelloMessage += HelloMessage;
             server.Start();
@@ -19,7 +19,7 @@ namespace NetCoreDockerDemo
 
         private static void HelloMessage(Socket socket, string content)
         {
-            Console.WriteLine(content);
+            Console.WriteLine(content + ", I love U!");
             socket.Send(Encoding.UTF8.GetBytes(
                 MessageType.Hello.ToString() + "|I love U!"));
         }
